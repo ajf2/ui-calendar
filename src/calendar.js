@@ -70,7 +70,7 @@ angular.module('ui.calendar', [])
             this.allEvents = function () {
                 return Array.prototype.concat.apply(
                     [],
-                    (sources || []).reduce(
+                    (Array.from(sources) || []).reduce(
                         function (previous, source) {
                             if (angular.isArray(source)) {
                                 previous.push(source);
@@ -108,7 +108,7 @@ angular.module('ui.calendar', [])
                 var self;
 
                 var getTokens = function () {
-                    return ((angular.isFunction(arraySource) ? arraySource() : arraySource) || []).reduce(
+                    return (Array.from(angular.isFunction(arraySource) ? arraySource() : arraySource) || []).reduce(
                         function (rslt, el) {
                             var token = tokenFn(el);
                             map[token] = el;
