@@ -16,7 +16,7 @@ angular.module('ui.calendar', [])
     .controller('uiCalendarCtrl', ['$scope', '$locale',
         function ($scope, $locale) {
 
-            var sources = $scope.eventSources;
+            var sources = typeof ($scope.eventSources) !== "undefined" && $scope.eventSources !== null ? $scope.eventSources : [];
             var extraEventSignature = $scope.calendarWatchEvent ? $scope.calendarWatchEvent : angular.noop;
 
             var wrapFunctionWithScopeApply = function (functionToWrap) {
@@ -240,7 +240,7 @@ angular.module('ui.calendar', [])
                 },
                 controller : 'uiCalendarCtrl',
                 link : function (scope, elm, attrs, controller) {
-                    var sources = scope.eventSources;
+                    var sources = typeof (scope.eventSources) !== "undefined" && scope.eventSources !== null ? scope.eventSources : [];
                     var sourcesChanged = false;
                     var calendar;
                     var eventSourcesWatcher = controller.changeWatcher(sources, controller.sourceFingerprint);
@@ -362,4 +362,4 @@ angular.module('ui.calendar', [])
             };
         }
     ]
-);
+    );
